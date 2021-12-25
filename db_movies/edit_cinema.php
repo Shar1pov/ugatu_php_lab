@@ -44,7 +44,7 @@
         
         
       ?> 
-      <h2>Создание записи</h2>
+      <h2>Редактирование записи</h2>
       
           <?php
           
@@ -59,11 +59,11 @@
           ?>
         <form action="save_edit_cinema.php" method="GET">
           <div class="form-group">
-            <label>Название фильма</label>
+            <label>Название кинозала</label>
             <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" required>
           </div>
           <div class="form-group mt-3">
-            <label>Жанр</label>
+            <label>Категория</label>
             <input type="text" class="form-control" name="category" value="<?php echo $category; ?>" required>
           </div>
           
