@@ -22,7 +22,7 @@
           <a href="https://github.com/Shar1pov/ugatu_php_lab" target="_blank" class="btn btn-primary btn-lg px-4 me-sm-3">
             Ссылка на репозиторий GitHub
           </a>
-          <a href="lab3.html" class="btn btn-outline-secondary btn-lg px-4">Назад</a>
+          <a href="index.php" class="btn btn-outline-secondary btn-lg px-4">Назад</a>
         </div>
       </div>
     </div>
