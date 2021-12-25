@@ -37,6 +37,7 @@
           while ($row = mysqli_fetch_array($result)) {
               $this->SetFillColor(255, 255, 255);
               $this->Cell(15, 7, $counter_items, 1, 0, 'C',1);
+              $vacant_places = $row['places'] - $row['booked_places'];
               $counter_items++;
               $this->Cell(90, 7, iconv('utf-8', 'windows-1251',$row['movie_name']), 1, 0, 'L',1);
               $this->Cell(50, 7, iconv('utf-8', 'windows-1251',$row['movie_genre']), 1, 0, 'L',1);
@@ -44,7 +45,7 @@
               $this->Cell(65, 7, iconv('utf-8', 'windows-1251',$row['name_cinema']), 1, 0, 'L',1);
               $this->Cell(50, 7, iconv('utf-8', 'windows-1251',$row['category_cinema']), 1, 0, 'L',1);
               $this->Cell(45, 7, date('d.m.Y',strtotime($row['timeshow'])), 1, 0, 'L',1);
-              $this->Cell(40, 7, iconv('utf-8', 'windows-1251',$row['booked_places']), 1, 0, 'L',1);
+              $this->Cell(40, 7, iconv('utf-8', 'windows-1251',$vacant_places), 1, 0, 'L',1);
               $this->Ln();
 
           }
