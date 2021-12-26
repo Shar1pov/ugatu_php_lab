@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+  
+if ($_SESSION['auth'] == false) {
+  header("location:login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,20 +23,26 @@
     <link href="../style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="px-4 pt-5 my-5 text-center border-bottom">
-      <h1 class="display-4 fw-bold">Шарипов Ильян Рустемович</h1>
-      <div class="col-lg-6 mx-auto">
-        <h2 class="mt-4 pb-5">Группа ПИ-322</h2>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-          <a href="https://github.com/Shar1pov/ugatu_php_lab" target="_blank" class="btn btn-primary btn-lg px-4 me-sm-3">
-            Ссылка на репозиторий GitHub
-          </a>
-          <a href="../index.html" class="btn btn-outline-secondary btn-lg px-4">К списку лабораторных работ</a>
-        </div>
-      </div>
-    </div>
+    <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <span class="fs-5">Приветствую, <strong><?php echo $_SESSION["username"] ?></strong></span>
+      </a>
 
-    <div class="container pb-200px">
+      <ul class="nav nav-pills">
+				<li class="nav-item"><a href="index.php" class="nav-link">Главная</a></li>
+				<li class="nav-item"><a href="personal.php" class="nav-link">Личные данные</a></li>
+				<?php 
+					if($_SESSION["type"] == "2"){
+						echo ('<li class="nav-item"><a href="admin_userslist.php" class="nav-link">Список пользователей</a></li>');
+					} 
+				?>
+        <li class="nav-item"><a href="logout.php" class="btn btn-outline-secondary">Выход</a></li>
+      </ul>
+    </header>
+  </div>
+
+    <div class="container pb-200px  mt-100px">
       <div class="tables-item pb-5">
         <?php
         
@@ -56,7 +71,12 @@
               <th scope="col">Год выпуска</th>
               <th scope="col">Кассовые сборы</th>
               <th scope="col">Редактировать</th>
-              <th scope="col">Удалить</th>
+              <?php 
+                if($_SESSION["type"] == "2"){
+                  echo ('<th scope="col">Удалить</th>');
+                } 
+              ?>
+              
             </tr>
           </thead>
           <tbody>
@@ -73,8 +93,11 @@
             echo "<td>$ " . $row['movie_sbori'] . "</td>";
             echo "<td><a href='edit_movie.php?id_movie=" . $row['id_movie']
             . "'>Изменить</a></td>"; 
-            echo "<td><a href='delete_movie.php?id_movie=" . $row['id_movie']
+            if($_SESSION["type"] == "2"){
+                  echo "<td><a href='delete_movie.php?id_movie=" . $row['id_movie']
             . "'>Удалить</a></td>"; 
+            }
+            
             echo "</tr>";
             }
             ?>
@@ -98,7 +121,12 @@
               <th scope="col">Название кинозала</th>
               <th scope="col">Категория</th>
               <th scope="col">Редактировать</th>
-              <th scope="col">Удалить</th>
+              <?php 
+                if($_SESSION["type"] == "2"){
+                  echo ('<th scope="col">Удалить</th>');
+                } 
+              ?>
+              
             </tr>
           </thead>
           <tbody>
@@ -112,8 +140,11 @@
             echo "<td>" . $row['category_cinema'] . "</td>";
             echo "<td><a href='edit_cinema.php?id_cinema=" . $row['id_cinema']
             . "'>Изменить</a></td>"; 
-            echo "<td><a href='delete_cinema.php?id_cinema=" . $row['id_cinema']
+            if($_SESSION["type"] == "2"){
+                  echo "<td><a href='delete_cinema.php?id_cinema=" . $row['id_cinema']
             . "'>Удалить</a></td>"; 
+            }
+            
             echo "</tr>";
             }
             ?>
@@ -142,7 +173,12 @@
               <th scope="col">Количество мест</th>
               <th scope="col">Мест забронировано</th>
               <th scope="col">Редактировать</th>
-              <th scope="col">Удалить</th>
+              <?php 
+                if($_SESSION["type"] == "2"){
+                  echo ('<th scope="col">Удалить</th>');
+                } 
+              ?>
+              
             </tr>
           </thead>
           <tbody>
@@ -159,8 +195,11 @@
             echo "<td>" . $row['booked_places'] . "</td>";
             echo "<td><a href='edit_filmshow.php?id_filmshow=" . $row['id_filmshow']
             . "'>Изменить</a></td>"; 
-            echo "<td><a href='delete_filmshow.php?id_filmshow=" . $row['id_filmshow']
+            if($_SESSION["type"] == "2"){
+                  echo "<td><a href='delete_filmshow.php?id_filmshow=" . $row['id_filmshow']
             . "'>Удалить</a></td>"; 
+            }
+            
             echo "</tr>";
             }
             ?>
@@ -175,7 +214,7 @@
       </div>
     </div>
   
-
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
