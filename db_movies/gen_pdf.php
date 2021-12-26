@@ -1,4 +1,11 @@
 <?php
+  session_start();
+
+  
+  if ($_SESSION['auth'] == false) {
+    header("location:login.php");
+  }
+
   $servername = "localhost";
   $database = "sharipov_labs";
   $username = "sharipov_labs";
@@ -37,8 +44,8 @@
           while ($row = mysqli_fetch_array($result)) {
               $this->SetFillColor(255, 255, 255);
               $this->Cell(15, 7, $counter_items, 1, 0, 'C',1);
-              $vacant_places = $row['places'] - $row['booked_places'];
               $counter_items++;
+              $vacant_places = $row['places'] - $row['booked_places'];
               $this->Cell(90, 7, iconv('utf-8', 'windows-1251',$row['movie_name']), 1, 0, 'L',1);
               $this->Cell(50, 7, iconv('utf-8', 'windows-1251',$row['movie_genre']), 1, 0, 'L',1);
               $this->Cell(40, 7, iconv('utf-8', 'windows-1251',$row['movie_god_vipuska']), 1, 0, 'L',1);

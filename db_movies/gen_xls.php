@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+
+if ($_SESSION['auth'] == false) {
+  header("location:login.php");
+}
+
   $servername = "localhost";
   $database = "sharipov_labs";
   $username = "sharipov_labs";
